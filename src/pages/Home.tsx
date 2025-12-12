@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import Particles from '../components/Particles';
 import ProfileCard from '../components/ProfileCard';
+import TypingEffect from '../components/TypingEffect';
 
 const Home = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <div className="home-page min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-slate-900">
             {/* Particles Background */}
             <div className="absolute inset-0 z-0">
                 <Particles
@@ -28,9 +29,12 @@ const Home = () => {
                         </span>
                     </div>
 
+
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-slate-800 dark:text-white">
                         Hi, I'm{' '}
-                        <span className="gradient-text">Sam</span>
+                        <span className="gradient-text">
+                            <TypingEffect text={['Sam']} />
+                        </span>
                     </h1>
 
                     <p className="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto md:mx-0">
