@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Project {
     id: number;
@@ -14,6 +16,13 @@ interface Project {
 const Projects = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Prevent background scrolling when modal is open
+    if (selectedProject) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'unset';
+    }
 
     const projects: Project[] = [
         {
@@ -120,7 +129,8 @@ const Projects = () => {
                                         <img
                                             src={project.images[0]}
                                             alt={project.title}
-                                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-pointer"
+                                            onClick={() => openModal(project)}
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
@@ -166,136 +176,148 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* Modal */}
-            {selectedProject && (
-                <div
-                    className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                    onClick={closeModal}
-                >
-                    <div
-                        className="bg-slate-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {/* Close Button */}
-                        <button
+            {/* Modal - Rendered in Portal to escape stacking context */}
+            {createPortal(
+                <AnimatePresence>
+                    {selectedProject && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
                             onClick={closeModal}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-white z-10"
                         >
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-
-                        {/* Image Slider */}
-                        <div className="relative aspect-video bg-gray-800 rounded-t-3xl overflow-hidden">
-                            {selectedProject.images.length > 0 ? (
-                                <>
-                                    <img
-                                        src={selectedProject.images[currentImageIndex]}
-                                        alt={selectedProject.title}
-                                        className="w-full h-full object-cover object-top"
-                                    />
-
-                                    {/* Navigation Arrows */}
-                                    {selectedProject.images.length > 1 && (
-                                        <>
-                                            <button
-                                                onClick={prevImage}
-                                                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                                            >
-                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                onClick={nextImage}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-                                            >
-                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-
-                                            {/* Dots */}
-                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                                                {selectedProject.images.map((_, idx) => (
-                                                    <button
-                                                        key={idx}
-                                                        onClick={() => setCurrentImageIndex(idx)}
-                                                        className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                                                            }`}
-                                                    />
-                                                ))}
-                                            </div>
-                                        </>
-                                    )}
-                                </>
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center">
-                                    <svg className="w-24 h-24 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                                className="bg-slate-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* Close Button */}
+                                <button
+                                    onClick={closeModal}
+                                    className="absolute top-4 right-4 text-gray-400 hover:text-white z-10"
+                                >
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
+                                </button>
+
+                                {/* Image Slider */}
+                                <div className="relative aspect-video bg-gray-800 rounded-t-3xl overflow-hidden">
+                                    {selectedProject.images.length > 0 ? (
+                                        <>
+                                            <img
+                                                src={selectedProject.images[currentImageIndex]}
+                                                alt={selectedProject.title}
+                                                className="w-full h-full object-cover object-top"
+                                            />
+
+                                            {/* Navigation Arrows */}
+                                            {selectedProject.images.length > 1 && (
+                                                <>
+                                                    <button
+                                                        onClick={prevImage}
+                                                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                                                    >
+                                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                                        </svg>
+                                                    </button>
+                                                    <button
+                                                        onClick={nextImage}
+                                                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                                                    >
+                                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                        </svg>
+                                                    </button>
+
+                                                    {/* Dots */}
+                                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                                        {selectedProject.images.map((_, idx) => (
+                                                            <button
+                                                                key={idx}
+                                                                onClick={() => setCurrentImageIndex(idx)}
+                                                                className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                                                                    }`}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center">
+                                            <svg className="w-24 h-24 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
 
-                        {/* Content */}
-                        <div className="p-8">
-                            <h2 className="text-3xl font-bold text-white mb-4">
-                                {selectedProject.title}
-                            </h2>
+                                {/* Content */}
+                                <div className="p-8">
+                                    <h2 className="text-3xl font-bold text-white mb-4">
+                                        {selectedProject.title}
+                                    </h2>
 
-                            <p className="text-gray-400 mb-6 leading-relaxed">
-                                {selectedProject.description}
-                            </p>
+                                    <p className="text-gray-400 mb-6 leading-relaxed">
+                                        {selectedProject.description}
+                                    </p>
 
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-2 mb-8">
-                                {selectedProject.tags.map((tag) => (
-                                    <span
-                                        key={tag}
-                                        className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-full border border-gray-600"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
+                                    {/* Tags */}
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        {selectedProject.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-full border border-gray-600"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
 
-                            {/* Features */}
-                            <div className="mb-8">
-                                <h3 className="text-xl font-bold text-white mb-4">Features</h3>
-                                <ul className="space-y-2">
-                                    {selectedProject.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-start gap-3 text-gray-400">
-                                            <span className="text-amber-400 mt-1">•</span>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                    {/* Features */}
+                                    <div className="mb-8">
+                                        <h3 className="text-xl font-bold text-white mb-4">Features</h3>
+                                        <ul className="space-y-2">
+                                            {selectedProject.features.map((feature, idx) => (
+                                                <li key={idx} className="flex items-start gap-3 text-gray-400">
+                                                    <span className="text-amber-400 mt-1">•</span>
+                                                    {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
 
-                            {/* Buttons */}
-                            <div className="flex gap-4">
-                                <a
-                                    href={selectedProject.liveLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-6 py-3 text-sm font-medium text-black bg-white hover:bg-gray-200 rounded-lg transition-colors"
-                                >
-                                    Live Preview
-                                </a>
-                                <a
-                                    href={selectedProject.githubLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-6 py-3 text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors border border-gray-600"
-                                >
-                                    Github Repository
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    {/* Buttons */}
+                                    <div className="flex gap-4">
+                                        <a
+                                            href={selectedProject.liveLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-6 py-3 text-sm font-medium text-black bg-white hover:bg-gray-200 rounded-lg transition-colors"
+                                        >
+                                            Live Preview
+                                        </a>
+                                        <a
+                                            href={selectedProject.githubLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-6 py-3 text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors border border-gray-600"
+                                        >
+                                            Github Repository
+                                        </a>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
             )}
         </div>
     );
