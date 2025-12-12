@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface PageTransitionProps {
     children: React.ReactNode;
@@ -7,30 +7,20 @@ interface PageTransitionProps {
 
 const PageTransition = ({ children }: PageTransitionProps) => {
     const location = useLocation();
-    const [displayChildren, setDisplayChildren] = useState(children);
-    const [transitionStage, setTransitionStage] = useState('fade-in');
-
-    useEffect(() => {
-        if (children !== displayChildren) {
-            setTransitionStage('fade-out');
-        }
-    }, [children, displayChildren]);
-
-    const handleTransitionEnd = () => {
-        if (transitionStage === 'fade-out') {
-            setDisplayChildren(children);
-            setTransitionStage('fade-in');
-        }
-    };
 
     return (
-        <div
-            className={`page-transition ${transitionStage}`}
-            onAnimationEnd={handleTransitionEnd}
-            key={location.pathname}
-        >
-            {transitionStage === 'fade-out' ? displayChildren : children}
-        </div>
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="page-transition"
+            >
+                {children}
+            </motion.div>
+        </AnimatePresence>
     );
 };
 

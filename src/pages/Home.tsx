@@ -1,9 +1,29 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import Particles from '../components/Particles';
 import ProfileCard from '../components/ProfileCard';
 import TypingEffect from '../components/TypingEffect';
 
 const Home = () => {
+    // Hide scrollbar on mount for desktop, restore on unmount
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        };
+
+        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            document.body.style.overflow = '';
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <div className="home-page min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-slate-900">
             {/* Particles Background */}

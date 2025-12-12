@@ -14,7 +14,7 @@ function App() {
     <>
       <ScrollToTop />
       <Layout>
-        <PageTransition key={location.pathname}>
+        <PageTransition>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

@@ -59,6 +59,7 @@ const Navbar = () => {
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                                 animate={isOpen ? "open" : "closed"}
+                                initial="closed"
                             >
                                 <motion.path
                                     strokeLinecap="round"
@@ -78,7 +79,6 @@ const Navbar = () => {
                                         closed: { opacity: 1 },
                                         open: { opacity: 0 }
                                     }}
-                                    transition={{ duration: 0.1 }}
                                 />
                                 <motion.path
                                     strokeLinecap="round"

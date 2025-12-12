@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 
 interface ThemeContextType {
     isDark: boolean;
@@ -20,18 +20,11 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-    const [isDark, setIsDark] = useState(true);
+    // Strictly enforce dark mode
+    const isDark = true;
+    const toggleTheme = () => { }; // No-op
 
-    useEffect(() => {
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [isDark]);
-
-    const toggleTheme = () => setIsDark(!isDark);
+    // No useEffect needed - we rely on index.html having class="dark"
 
     return (
         <ThemeContext.Provider value={{ isDark, toggleTheme }}>
