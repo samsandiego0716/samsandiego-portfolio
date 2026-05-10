@@ -49,13 +49,17 @@ const About = () => {
                             <h2 className="text-2xl font-bold text-center mb-4 text-slate-800 dark:text-white">Sam San Diego</h2>
                             <p className="text-sky-600 dark:text-sky-400 text-center mb-6">Full Stack Developer</p>
 
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                                I am Sam San Diego, I am passionate about becoming a web developer in the future. I am studying well about developing websites and others. I am currently studying at Bestlink College of the Philippines with a Bachelor of Science in Information Technology course. I love creating systems that have an impact on our lives.
+                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+                                I am <strong>Sam San Diego</strong>, a passionate web developer and aspiring <strong>full-stack developer</strong>. I am studying well about developing websites and others.
                             </p>
 
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-4">
+                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-4 text-justify">
+                                I am currently studying at Bestlink College of the Philippines with a Bachelor of Science in Information Technology course. I love creating systems that have an impact on our lives.
+                            </p>
+
+                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-4 text-justify">
                                 When I'm not coding, you can find me exploring new technologies,
-                                contributing to open-source projects, or playing online games.
+                                doing graphic design commissions, or playing online games.
                             </p>
                         </div>
                     </div>

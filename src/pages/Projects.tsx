@@ -64,22 +64,6 @@ const Projects = () => {
             liveLink: 'https://cafe-kantina.vercel.app/',
             githubLink: 'https://github.com/samsandiego0716/cafe-kantina',
         },
-        {
-            id: 3,
-            title: 'Enrollment Management System',
-            description: 'A comprehensive enrollment management system designed to streamline the enrollment process for students and administrators.',
-            tags: ['React', 'TypeScript', 'Vanilla CSS', 'Bento Grid', 'Firebase'],
-            images: ['/enrollment_system.png'],
-            features: [
-                'Student and Admin Portals',
-                'Real-time Enrollment Updates',
-                'Secure Authentication',
-                'Responsive Design',
-                'Online Enrollment & Payment',
-            ],
-            liveLink: 'https://enrollment-management-system-drab.vercel.app/',
-            githubLink: 'https://github.com/samsandiego0716/enrollment-management-system',
-        },
     ];
 
     const openModal = (project: Project) => {
