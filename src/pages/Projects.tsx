@@ -30,6 +30,23 @@ const Projects = () => {
     const projects: Project[] = [
         {
             id: 1,
+            title: 'ClassVote',
+            description: 'A Classroom Web-Based Voting Management System designed for multiple administrators to manage isolated voting environments with real-time analytics and secure voter portals.',
+            tags: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
+            images: ['/classroomvoting.png'],
+            features: [
+                'Admin Data Isolation: Independent workspaces for each administrator',
+                'Election Management: Create and manage multiple elections with custom settings',
+                'Candidate & Position Tracking: Organize candidates and track election progress',
+                'Voter Management System: Secure voter list and access code management',
+                'Secure Voting Portal: Encrypted and transparent voting process',
+                'Real-time Results & Analytics: Live data visualization of election results',
+            ],
+            liveLink: 'https://classroomvoting.xo.je/voter/login.php',
+            githubLink: '#',
+        },
+        {
+            id: 2,
             title: 'EggFriedRice',
             description: 'A visually appealing landing page showcasing Discounted ML Diamonds and Pilot Services. Built with clean HTML structure, modern CSS styling, and interactive JavaScript features.',
             tags: ['HTML', 'CSS', 'JavaScript'],
@@ -45,7 +62,7 @@ const Projects = () => {
             githubLink: 'https://github.com/samsandiego0716/eggfriedrice-website',
         },
         {
-            id: 2,
+            id: 3,
             title: 'Cafe Kantina',
             description: 'A full-featured ordering system for a cafe with menu management, order processing, and real-time database integration using Firebase.',
             tags: ['JavaScript', 'TypeScript', 'CSS', 'Firebase'],
