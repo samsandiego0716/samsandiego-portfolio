@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import './ProfileCard.css';
 
-const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
+const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#1c3a3a8c 0%,#b8f2e644 100%)';
 
 const ANIMATION_CONFIG = {
     INITIAL_DURATION: 1200,
@@ -316,7 +316,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             '--icon': iconUrl ? `url(${iconUrl})` : 'none',
             '--grain': grainUrl ? `url(${grainUrl})` : 'none',
             '--inner-gradient': innerGradient ?? DEFAULT_INNER_GRADIENT,
-            '--behind-glow-color': behindGlowColor ?? 'rgba(125, 190, 255, 0.67)',
+            '--behind-glow-color': behindGlowColor ?? 'rgba(184, 242, 230, 0.5)',
             '--behind-glow-size': behindGlowSize ?? '50%'
         } as React.CSSProperties),
         [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize]

@@ -9,13 +9,13 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
     return (
         <ClickSpark
-            sparkColor="#0ea5e9"
+            sparkColor="#b8f2e6"
             sparkSize={12}
             sparkRadius={20}
             sparkCount={8}
             duration={400}
         >
-            <div className="min-h-screen flex flex-col bg-slate-900">
+            <div className="min-h-screen flex flex-col bg-[#1c1c1c]">
                 <Navbar />
                 <main className="flex-1 pt-16">
                     {children}

@@ -1,3 +1,5 @@
+import ScrollReveal from '../components/ScrollReveal';
+
 const About = () => {
     const frontendSkills = [
         { name: 'HTML', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
@@ -11,109 +13,78 @@ const About = () => {
     ];
 
     const backendSkills = [
+        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
         { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
-        { name: 'Firebase', icon: 'https://img.icons8.com/color/96/firebase.png' },
         { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg' },
+        { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+        { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+        { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+        { name: 'Firebase', icon: 'https://img.icons8.com/color/96/firebase.png' },
     ];
 
-    const databaseSkills = [
-        { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-    ];
+    const SkillGrid = ({ skills }: { skills: { name: string; icon: string }[] }) => (
+        <div className="grid grid-cols-4 gap-4">
+            {skills.map((skill) => (
+                <div key={skill.name} className="flex flex-col items-center gap-2 p-3 bg-[#b8f2e6]/5 rounded-xl hover:bg-[#b8f2e6]/15 hover:scale-105 transition-all duration-300 border border-transparent hover:border-[#b8f2e6]/20">
+                    <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
+                    <span className="text-xs text-[#5e6472] text-center">{skill.name}</span>
+                </div>
+            ))}
+        </div>
+    );
 
     return (
-        <div className="min-h-screen py-20 px-4">
+        <section id="about" className="min-h-screen py-20 px-4">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 animate-fade-in">
-                    <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-slate-800 dark:text-white">
-                        About <span className="gradient-text">Me</span>
-                    </h1>
-                    <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                        Get to know me better and discover my journey in the world of development
-                    </p>
-                </div>
+                <ScrollReveal>
+                    <div className="text-center mb-16">
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-[#fafafa]">
+                            About <span className="gradient-text">Me</span>
+                        </h1>
+                        <p className="text-[#5e6472] max-w-2xl mx-auto">
+                            Get to know me better and discover my journey in the world of development
+                        </p>
+                    </div>
+                </ScrollReveal>
 
                 <div className="grid md:grid-cols-2 gap-12 items-start">
-                    {/* Profile Section */}
-                    <div className="animate-fade-in delay-100">
-                        <div className="glass rounded-2xl p-8 hover-glow">
-                            {/* Photo */}
-                            <div className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden">
-                                <img
-                                    src="/about-photo.png"
-                                    alt="Sam San Diego"
-                                    className="w-full h-full object-cover"
-                                />
+                    <ScrollReveal variant="fadeLeft" delay={100}>
+                        <div className="bg-[#1c1c1c]/80 backdrop-blur-sm rounded-2xl p-8 border border-[#b8f2e6]/20 card-hover">
+                            <div className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden border-2 border-[#b8f2e6]/30">
+                                <img src="/about-photo.png" alt="Sam San Diego" className="w-full h-full object-cover" />
                             </div>
-
-                            <h2 className="text-2xl font-bold text-center mb-4 text-slate-800 dark:text-white">Sam San Diego</h2>
-                            <p className="text-sky-600 dark:text-sky-400 text-center mb-6">Full Stack Developer</p>
-
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
-                                I am <strong>Sam San Diego</strong>, a passionate web developer and aspiring <strong>full-stack developer</strong>. I am studying well about developing websites and others.
+                            <h2 className="text-2xl font-bold text-center mb-4 text-[#fafafa]">Sam San Diego</h2>
+                            <p className="text-[#b8f2e6] text-center mb-6">Full Stack Developer</p>
+                            <p className="text-[#fafafa]/70 leading-relaxed text-justify">
+                                I am <strong className="text-[#fafafa]">Sam San Diego</strong>, a passionate web developer and aspiring <strong className="text-[#fafafa]">full-stack developer</strong>. I am studying well about developing websites and others.
                             </p>
-
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-4 text-justify">
+                            <p className="text-[#fafafa]/70 leading-relaxed mt-4 text-justify">
                                 I am currently studying at Bestlink College of the Philippines with a Bachelor of Science in Information Technology course. I love creating systems that have an impact on our lives.
                             </p>
-
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-4 text-justify">
-                                When I'm not coding, you can find me exploring new technologies,
-                                doing graphic design commissions, or playing online games.
+                            <p className="text-[#fafafa]/70 leading-relaxed mt-4 text-justify">
+                                When I'm not coding, you can find me exploring new technologies, doing graphic design commissions, or playing online games.
                             </p>
                         </div>
-                    </div>
+                    </ScrollReveal>
 
-                    {/* Skills Section */}
-                    <div className="animate-fade-in delay-200 space-y-6">
-                        {/* Frontend Skills */}
-                        <div className="glass rounded-2xl p-8 hover-glow">
-                            <h3 className="text-xl font-bold mb-6 text-slate-800 dark:text-white">
-                                <span className="gradient-text">Frontend</span> Skills
-                            </h3>
-                            <div className="grid grid-cols-4 gap-4">
-                                {frontendSkills.map((skill) => (
-                                    <div key={skill.name} className="flex flex-col items-center gap-2 p-3 bg-sky-50 dark:bg-slate-800 rounded-xl hover:scale-105 transition-transform">
-                                        <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 text-center">{skill.name}</span>
-                                    </div>
-                                ))}
+                    <div className="space-y-6">
+                        <ScrollReveal variant="fadeRight" delay={200}>
+                            <div className="bg-[#1c1c1c]/80 backdrop-blur-sm rounded-2xl p-8 border border-[#b8f2e6]/20 card-hover">
+                                <h3 className="text-xl font-bold mb-6 text-[#fafafa]"><span className="gradient-text">Frontend</span> Skills</h3>
+                                <SkillGrid skills={frontendSkills} />
                             </div>
-                        </div>
+                        </ScrollReveal>
+                        <ScrollReveal variant="fadeRight" delay={300}>
+                            <div className="bg-[#1c1c1c]/80 backdrop-blur-sm rounded-2xl p-8 border border-[#b8f2e6]/20 card-hover">
+                                <h3 className="text-xl font-bold mb-6 text-[#fafafa]"><span className="gradient-text">Backend</span> Skills</h3>
+                                <SkillGrid skills={backendSkills} />
+                            </div>
+                        </ScrollReveal>
 
-                        {/* Backend Skills */}
-                        <div className="glass rounded-2xl p-8 hover-glow">
-                            <h3 className="text-xl font-bold mb-6 text-slate-800 dark:text-white">
-                                <span className="gradient-text">Backend</span> Skills
-                            </h3>
-                            <div className="grid grid-cols-4 gap-4">
-                                {backendSkills.map((skill) => (
-                                    <div key={skill.name} className="flex flex-col items-center gap-2 p-3 bg-sky-50 dark:bg-slate-800 rounded-xl hover:scale-105 transition-transform">
-                                        <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 text-center">{skill.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Database Skills */}
-                        <div className="glass rounded-2xl p-8 hover-glow">
-                            <h3 className="text-xl font-bold mb-6 text-slate-800 dark:text-white">
-                                <span className="gradient-text">Database</span> Skills
-                            </h3>
-                            <div className="grid grid-cols-4 gap-4">
-                                {databaseSkills.map((skill) => (
-                                    <div key={skill.name} className="flex flex-col items-center gap-2 p-3 bg-sky-50 dark:bg-slate-800 rounded-xl hover:scale-105 transition-transform">
-                                        <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 text-center">{skill.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
