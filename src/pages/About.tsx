@@ -2,24 +2,24 @@ import ScrollReveal from '../components/ScrollReveal';
 
 const About = () => {
     const frontendSkills = [
-        { name: 'HTML', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-        { name: 'CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-        { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-        { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-        { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
-        { name: 'Shadcn', icon: 'https://avatars.githubusercontent.com/u/139895814?s=200&v=4' },
-        { name: 'Framer Motion', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg' },
+        { name: 'HTML', icon: 'html.png' },
+        { name: 'CSS', icon: 'css.png' },
+        { name: 'JavaScript', icon: 'js.png' },
+        { name: 'TypeScript', icon: 'ts.png' },
+        { name: 'React', icon: 'react.png' },
+        { name: 'Tailwind CSS', icon: 'tw.png' },
+        { name: 'Shadcn', icon: 'shad.png' },
+        { name: 'Framer Motion', icon: 'framer.png' },
     ];
 
     const backendSkills = [
-        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
-        { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg' },
-        { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-        { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
-        { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
-        { name: 'Firebase', icon: 'https://img.icons8.com/color/96/firebase.png' },
+        { name: 'Node.js', icon: 'node.png' },
+        { name: 'PHP', icon: 'php.png' },
+        { name: 'Laravel', icon: 'laravel.png' },
+        { name: 'MySQL', icon: 'mysql.png' },
+        { name: 'PostgreSQL', icon: 'post.png' },
+        { name: 'MongoDB', icon: 'mongo.png' },
+        { name: 'Firebase', icon: 'firebase.png' },
     ];
 
     const SkillGrid = ({ skills }: { skills: { name: string; icon: string }[] }) => (
