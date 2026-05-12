@@ -54,9 +54,9 @@ const About = () => {
                                 <img src="/about-photo.png" alt="Sam San Diego" className="w-full h-full object-cover" />
                             </div>
                             <h2 className="text-2xl font-bold text-center mb-4 text-[#fafafa]">Sam San Diego</h2>
-                            <p className="text-[#b8f2e6] text-center mb-6">Full Stack Developer</p>
+                            <p className="text-[#b8f2e6] text-center mb-6">Web Developer</p>
                             <p className="text-[#fafafa]/70 leading-relaxed text-justify">
-                                I am <strong className="text-[#fafafa]">Sam San Diego</strong>, a passionate web developer and aspiring <strong className="text-[#fafafa]">full-stack developer</strong>. I am studying well about developing websites and others.
+                                I am <strong className="text-[#fafafa]">Sam San Diego</strong>, a passionate developer and aspiring <strong className="text-[#fafafa]">Web Developer</strong>. I am studying well about developing websites and others.
                             </p>
                             <p className="text-[#fafafa]/70 leading-relaxed mt-4 text-justify">
                                 I am currently studying at Bestlink College of the Philippines with a Bachelor of Science in Information Technology course. I love creating systems that have an impact on our lives.
