@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 
 const About = () => {
+    const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const frontendSkills = [
         { name: 'HTML', icon: 'html.png' },
         { name: 'CSS', icon: 'css.png' },
@@ -83,6 +85,66 @@ const About = () => {
 
                     </div>
                 </div>
+
+                {/* Certifications Section */}
+                <ScrollReveal delay={200}>
+                    <div className="text-center mt-20 mb-10">
+                        <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-[#fafafa]">
+                            My <span className="gradient-text">Certifications</span>
+                        </h2>
+                        <p className="text-[#5e6472] max-w-xl mx-auto">
+                            Credentials and achievements I've earned along the way
+                        </p>
+                    </div>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                    <ScrollReveal variant="fadeUp" delay={100}>
+                        <div className="bg-[#1c1c1c]/80 backdrop-blur-sm rounded-2xl p-6 border border-[#b8f2e6]/20 card-hover">
+                            <div
+                                className="aspect-[14/10] flex items-center justify-center mb-4 overflow-hidden cursor-zoom-in"
+                                onClick={() => setLightboxSrc('CERT 1.png')}
+                            >
+                                <img src="CERT 1.png" alt="Certificate 1" className="w-full h-full object-contain" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-[#fafafa] text-center">Certificate 1</h3>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal variant="fadeUp" delay={200}>
+                        <div className="bg-[#1c1c1c]/80 backdrop-blur-sm rounded-2xl p-6 border border-[#b8f2e6]/20 card-hover">
+                            <div
+                                className="aspect-[14/10] flex items-center justify-center mb-4 overflow-hidden cursor-zoom-in"
+                                onClick={() => setLightboxSrc('CERT 2.png')}
+                            >
+                                <img src="CERT 2.png" alt="Certificate 2" className="w-full h-full object-contain" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-[#fafafa] text-center">Certificate 2</h3>
+                        </div>
+                    </ScrollReveal>
+                </div>
+
+                {/* Fullscreen Lightbox Modal */}
+                {lightboxSrc && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm cursor-zoom-out"
+                        onClick={() => setLightboxSrc(null)}
+                    >
+                        <button
+                            className="absolute top-6 right-6 text-white/70 hover:text-white text-3xl font-light transition-colors duration-200 z-10"
+                            onClick={(e) => { e.stopPropagation(); setLightboxSrc(null); }}
+                            aria-label="Close lightbox"
+                        >
+                            ✕
+                        </button>
+                        <img
+                            src={lightboxSrc}
+                            alt="Certificate fullscreen"
+                            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                )}
             </div>
         </section>
     );
