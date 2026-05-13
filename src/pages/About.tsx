@@ -28,7 +28,7 @@ const About = () => {
         <div className="grid grid-cols-4 gap-4">
             {skills.map((skill) => (
                 <div key={skill.name} className="flex flex-col items-center gap-2 p-3 bg-[#b8f2e6]/5 rounded-xl hover:bg-[#b8f2e6]/15 hover:scale-105 transition-all duration-300 border border-transparent hover:border-[#b8f2e6]/20">
-                    <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
+                    <img src={skill.icon} alt={skill.name} className="w-10 h-10 object-contain" />
                     <span className="text-xs text-[#5e6472] text-center">{skill.name}</span>
                 </div>
             ))}
